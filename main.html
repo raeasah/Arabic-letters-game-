@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!-- فكرة وتصميم: [اسمك] - بمساعدة ChatGPT -->
+<!-- تاريخ الإنشاء: [تاريخ اليوم] -->
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة الحروف العربية</title>
+    <style>
+        body { 
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            text-align: center; 
+            margin: 20px; 
+            background-image: url('background.jpg'); /* خلفية جذابة للأطفال */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #000;
+        }
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(5, 70px); 
+            gap: 15px; 
+            justify-content: center; 
+        }
+        .cell { 
+            border: 3px solid #ff69b4; 
+            padding: 25px; 
+            cursor: pointer; 
+            background-color: #ffb6c1; 
+            color: #fff; 
+            border-radius: 15px;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+            font-size: 24px; 
+            font-weight: bold;
+        }
+        .cell:hover { 
+            background-color: #ff1493;
+        }
+        #result { 
+            margin-top: 20px; 
+            font-weight: bold; 
+        }
+        #instructions { 
+            background-color: rgba(255, 221, 87, 0.9); 
+            color: #000; 
+            padding: 15px; 
+            border-radius: 10px; 
+            margin-bottom: 20px; 
+            font-size: 20px; 
+        }
+        h1 {
+            color: #ff1493;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        #credits {
+            margin-top: 30px;
+            font-size: 16px;
+            color: #555;
+            background-color: rgba(255, 243, 205, 0.9);
+            border: 2px solid #ffeeba;
+            padding: 10px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>لعبة الحروف العربية</h1>
+    <div id="instructions">اضغط على رقم، استمع للحرف، ثم حاول نطقه بشكل صحيح!</div>
+    <div class="grid" id="grid"></div>
+    <div id="letter" style="font-size: 48px; margin-top: 20px;"></div>
+    <div id="result"></div>
+
+    <div id="credits">تصميم وتطوير: [اسمك] - بمساعدة ChatGPT</div>
+
+    <script>
+        const letters = ['ا','ب','ت','ث','ج','ح','خ','د','ذ','ر','ز','س','ش','ص','ض','ط','ظ','ع','غ','ف','ق','ك','ل','م','ن','ه','و','ء','ي'];
+        const colors = ['#FF6F61', '#6B5B95', '#88B04B', '#F7CAC9', '#92A8D1', '#955251', '#B565A7', '#009B77'];
+        const grid = document.getElementById('grid');
+        const result = document.getElementById('result');
+
+        // إنشاء الأرقام
+        letters.forEach((letter, index) => {
+            const cell = document.createElement('div');
+            cell.className = 'cell';
+            cell.innerText = index + 1;
+            cell.style.backgroundColor = colors[index % colors.length];
+            cell.onclick = () => showLetter(index, cell);
+            grid.appendChild(cell);
+        });
+
+        function showLetter(index, cell) {
+            const letter = letters[index];
+            cell.innerText = letter;
+            cell.style.color = '#000';
+            playLetterSound(letter);
+        }
+
+        function playLetterSound(letter) {
+            const audio = new Audio(`sounds/${letter}.mp3`);
+            audio.play();
+        }
+    </script>
+</body>
+</html>
